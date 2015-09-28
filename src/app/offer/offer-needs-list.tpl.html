@@ -1,0 +1,54 @@
+<!-- BEGIN USER APPS INBOX -->
+<div class="mail-apps-wrap">
+
+    <div class="the-box bg-primary no-border no-margin heading">
+        <div class="row">
+            <h1><i class="fa fa-gift icon-lg icon-circle icon-bordered"></i> Mis Necesidades</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container-masonry">
+<div class="alert alert-warning alert-bold-border fade in alert-dismissable" ng-show="activating">
+        <strong>Hey!</strong> No has pedido nada todavía.Podés ver si algún ofrecimiento, en el listado de publicaciones puede ser útil!
+    </div>
+    <ol>
+        <li class="item-masonry" ng-repeat="offer in offers">
+            <div class="the-box no-border full store-item text-center mansory-inner">
+
+                <img data-ng-src="{{offer.image[0].path}}" class="item-image" alt="Image" ui-sref="panel.offerDetailUser({id: offer.id})">
+
+                <div class="the-box bg-default no-margin no-border item-des">
+
+                    <p class="text-muted text-left">
+                       {{offer.object.description}}
+                    </p>
+                    <div ng-if="offer.processState.id=='C'" >
+                        <p><span class="badge badge-success">Ayuda concretada!</span></p>
+                    </div>
+                    <div ng-if="offer.processState.id=='P'" >
+                        <p><span class="badge badge-info">Esperando que la ayuda se concrete</span></p>
+                    </div>
+                    <div ng-if="offer.processState.id=='V'" >
+                        <p><span class="badge badge-danger">Ayuda no concretada</span></p>
+                    </div>
+                    <h3>
+                        <a class="bolded" ui-sref="panel.offerDetailUser({id: offer.id})">{{offer.title}}</a>
+                    </h3>
+
+                    <div class="row extra-data">
+                        <div ng-if="offer.processState.id=='C'" >
+                            <p class="text-muted text-left">Que bueno que hayas conseguido lo que necesitabas!. Esperamos que puedas seguir colaborando a diferentes causas. Hasta la próxima.</p>
+                        </div>
+                        <div ng-if="offer.processState.id=='P'" >
+                            <p class="text-muted text-left">Podrás ver que sucedió con tu pedido en este lugar. Recuerda enviar mensajes a la persona que tiene lo que necesitas!.</p>
+                        </div>
+                        <div ng-if="offer.processState.id=='V'" >
+                            <p class="text-muted text-left">Lamentablemente, el usuario ha decidido seguir con el ofrecimiento... Igualmente no desesperes! Buscá en los otros ofrecimientos, quién te dice y aparece algo mucho mejor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ol>
+</div>

@@ -1,0 +1,52 @@
+<!-- BEGIN USER APPS INBOX -->
+<div class="mail-apps-wrap">
+
+    <div class="the-box bg-danger no-border no-margin heading">
+        <div class="row">
+            <h1><i class="fa fa-gift icon-lg icon-circle icon-bordered"></i> Ofrecimientos favoritos</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container-masonry">
+    <div class="alert alert-warning alert-bold-border fade in alert-dismissable" ng-show="activating">
+        <strong>Hey!</strong> Todavía no tienes favoritos..
+    </div>
+    <ol>
+        <li class="item-masonry" ng-repeat="offer in offers">
+            <div ng-if="offer.isFavorite == '1'" class="the-box no-border full store-item text-center mansory-inner">
+
+                <img data-ng-src="{{offer.image[0].path}}" class="item-image" alt="Image" ui-sref="web.offerDetail({id: offer.id})">
+
+                <div class="the-box bg-default no-margin no-border item-des">
+                    <p class="text-muted">
+                        {{offer.object.description}}
+                    </p>
+
+                    <h3><a class="bolded" ui-sref="web.offerDetail({id: offer.id})">{{offer.title}}</a>
+                        </h3>
+
+                    <p>{{offer.description}}</p>
+
+                    <p>{{message}}</p>
+
+                    <a href="#/checkout/offer/{{offer.id}}" ng-if="offer.processState.id == 'V' &&  offer.isOwner == '0'" class="btn btn-danger btn-block">
+                        <span class="glyphicon glyphicon-ok"></span>Lo necesito
+                    </a>
+
+                    <div class="row extra-data">
+                        <div class="col-md-6 col-xs-6 text-left">
+                            <a href ng-click="toggleFavorite()" title="Favorito">
+                                <i class="glyphicon glyphicon-heart text-muted" ng-class="{'text-warning': offer.isFavorite == '1'}"></i>
+                            </a>
+                            {{offer.favorites[0].quan}}
+                        </div>
+                        <div class="col-md-6 col-xs-6 text-right">
+                            <i class="glyphicon glyphicon-eye-open text-muted"></i> {{offer.views}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ol>
+</div>

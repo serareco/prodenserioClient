@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="AyudarEsFacilApp" ng-controller="AppCtrl" class="no-js" lang="es">
+
+<head>
+    <title ng-bind="pageTitle">AyudarEsFacil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+
+    <!-- compiled CSS -->
+    <% styles.forEach( function ( file ) { %>
+        <link rel="stylesheet" type="text/css" href="<%= file %>" />
+        <% }); %>
+
+            <!-- assets -->
+            <link rel="stylesheet" href="assets/plugins/icheck/skins/all.css">
+            <link rel="stylesheet" href="assets/plugins/summernote/summernote.min.css">
+            <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+            <link rel="stylesheet" href="assets/plugins/owl-carousel/owl.carousel.min.css">
+            <link rel="stylesheet" href="assets/plugins/owl-carousel/owl.theme.min.css">
+            <link rel="stylesheet" href="assets/plugins/owl-carousel/owl.transitions.min.css">
+            <link rel="stylesheet" href="assets/css/style.css">
+            <link rel="stylesheet" href="assets/css/style-responsive.css">
+            <link rel="stylesheet" href="assets/css/default.css">
+</head>
+
+<body ng-class="bodyClass">
+    <!--
+        ===========================================================
+        BEGIN PAGE
+        ===========================================================
+        -->
+    <div ui-view></div>
+
+    <!-- compiled JavaScript -->
+    <% scripts.forEach( function ( file ) { %>
+        <script type="text/javascript" src="<%= file %>"></script>
+        <% }); %>
+
+            <script src="assets/js/app-template.js"></script>
+            <script src="assets/js/shrink-main-navigation.js"></script>
+            <script src="assets/plugins/nicescroll/jquery.nicescroll.js"></script>
+            <script src="assets/plugins/summernote/summernote.min.js"></script>
+            <script src="assets/plugins/owl-carousel/owl.carousel.min.js"></script>
+            <!-- Pega este código antes de cerrar la etiqueta </body> -->
+            <script type="text/javascript">
+                (function() {
+                    function $MPBR_load() {
+                        window.$MPBR_loaded !== true && (function() {
+                            var s = document.createElement("script");
+                            s.type = "text/javascript";
+                            s.async = true;
+                            s.src = ("https:" == document.location.protocol ? "https://www.mercadopago.com/org-img/jsapi/mptools/buttons/" : "http://mp-tools.mlstatic.com/buttons/") + "render.js";
+                            var x = document.getElementsByTagName('script')[0];
+                            x.parentNode.insertBefore(s, x);
+                            window.$MPBR_loaded = true;
+                        })();
+                    }
+                    window.$MPBR_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPBR_load) : window.addEventListener('load', $MPBR_load, false)) : null;
+                })();
+            </script>
+            <script type="text/javascript" src="http://mp-tools.mlstatic.com/buttons/render.js"></script>
+
+            <script>
+                function callbackMPModal(json) {
+                    var flowScope = angular.element($(".panel.wizard")).scope();
+                    flowScope.paymentStatus = json.collection_status;
+                    flowScope.flow.toNextStep();
+                };
+            </script>
+</body>
+
+</html>

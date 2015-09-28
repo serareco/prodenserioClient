@@ -1,0 +1,208 @@
+<!-- BEGIN USER APPS INBOX -->
+<div class="mail-apps-wrap">
+
+	<div class="the-box bg-info no-border no-margin heading">
+		<div class="row">
+			<h1><i class="fa fa-user icon-lg icon-circle icon-bordered"></i> Mis Datos</h1>
+		</div><!-- /.row -->
+	</div><!-- the-box -->
+	
+	<div class="row">&nbsp;</div>
+
+	<div class="row">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-10">
+			<!-- Begin basic form elements -->
+					<div ng-if="status=='SUCCESS'" class="alert alert-success alert-block fade in alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<strong>Ya estás registrado</strong> ahora a disfrutar
+					</div>
+					<div ng-if="status=='ERROR'" class="alert alert-warning alert-block fade in alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<strong>Lo sentimos, pero...</strong><br/>
+						{{error}}
+					</div>
+			<div class="the-box">
+				<h2>Datos Personales</h2>
+				<form role = "form">
+					<div class="form-group">
+						<label>Correo Electronico</label>
+						<input type="text" ng-model="user.email" class="form-control" placeholder="Correo Electronico">
+					</div>
+					<div class="form-group">
+						<label>Nombre</label>
+						<input type="text" ng-model="user.name" class="form-control" placeholder="Nombre">
+					</div>
+					<div class="form-group">
+						<label>Apellido</label>
+						<input type="text" ng-model="user.lastName" class="form-control" placeholder="Apellido">
+					</div>
+					<div class="form-group">
+						<label>Fecha de nacimiento</label>
+						<div class="row">
+							<div class="col-xs-6">
+								<div style="display:inline-block;">
+									<p class="input-group">
+										<input type="text" datepicker-popup="yyyy-MM-dd" class="form-control" ng-model="user.birthdayDate" show-weeks="false" is-open="opened" date-disabled="disabled(date, mode)" ng-required="true" show-button-bar="false"/>
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default" ng-click="open($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Donde podemos encontrarte?</label><p class="help-block"><small><strong>Atención: </strong>Cuando hagas un pedido, o quieras donar algo, esta información será súper importante!</small></p>
+					</div>
+					<div class="form-group">	
+						<div ng-repeat="address in user.addresses"><!-- Addresses Container -->
+							<div class="form-group">
+								<div class="row">
+									<div class="col-xs-1">
+										<label class="hidden-xs">Provincia</label>
+									</div>
+									<div class="col-xs-11" class="hidden-xs">
+										<select ng-model="address.provinceId" class="form-control" ng-change="getDepartments(address.provinceId);" >
+											<option value="">Provincia</option>
+											<option ng-repeat="province in provinces" value="{{province.id}}" ng-selected="address.provinceId == province.id">{{province.description}}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-xs-1">
+										<label class="hidden-xs">Municipio</label>
+									</div>
+									<div class="col-xs-11" class="hidden-xs">
+										<select ng-model="address.departmentId" class="form-control" ng-change="getCities(address.departmentId);" >
+											<option value="">Municipio</option>
+											<option ng-repeat="department in departments" value="{{department.id}}" ng-selected="address.departmentId == department.id">{{department.description}}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-xs-1">
+										<label class="hidden-xs">Localidad</label>
+									</div>
+									<div class="col-xs-11">
+										<select ng-model="address.cityId" class="form-control">
+											<option value="">Localidad</option>
+											<option ng-repeat="city in cities" value="{{city.id}}" ng-selected="address.cityId == city.id">{{city.description}}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-xs-1">
+										<label class="hidden-xs">Calle</label>
+									</div>
+									<div class="col-md-8 col-xs-8">
+										<input type="text" ng-model="address.street" class="form-control" placeholder="Calle">
+									</div>
+									<div class="col-sm-1 col-xs-1">
+										<label class="hidden-xs">Número</label>
+									</div>
+									<div class="col-sm-2 col-xs-2">
+										<input type="text" ng-model="address.number" class="form-control" placeholder="Nro"/>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-sm-1 col-xs-1">
+										<label class="hidden-xs">Cod. Postal</label>
+									</div>
+									<div class="col-sm-2 col-xs-11">
+										<input type="text" ng-model="address.postalCode" class="form-control" placeholder="C.P."/>
+									</div>
+									<div class="col-sm-1 col-xs-1">
+										<label class="hidden-xs">Piso</label>
+									</div>
+									<div class="col-sm-2 col-xs-11">
+										<input type="text" ng-model="address.floor" class="form-control" placeholder="Piso"/>
+									</div>
+									<div class="col-sm-1 col-xs-1">
+										<label class="hidden-xs">Dpto.</label>
+									</div>
+									<div class="col-sm-2 col-xs-11">
+										<input type="text" ng-model="address.apartment" class="form-control" placeholder="Dpto"/>
+									</div>
+								</div>
+							</div>
+						</div><!--  Addresses Container -->
+					</div>
+					<div class="form-group">
+						<label>Cómo nos podemos comunicar con vos?</label>
+						<div class="row" ng-repeat="phone in user.phones">
+							<div class="phone-container"> <!-- Contenedor de tel. -->
+								<div class="col-xs-2">
+									<input type="text" ng-model="phone.areaCode" class="form-control" placeholder="Cod. Area">
+									<p class="help-block"><small>Si estas en BS AS es 011</small></p>
+								</div>
+								<div class="col-xs-5">
+									<input type="text" ng-model="phone.number" class="form-control" placeholder="Nro. Telefono">
+								</div>
+								<div class="col-xs-4">
+									<select data-ng-model="phone.typeId" class="form-control">
+										<option value="1">Celular</option>
+										<option value="2">Particular</option>
+										<option value="3">Laboral</option>
+									</select>
+								</div>
+								<div class="col-xs-1">
+									<button ng-click="deletePhone($index)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-minus"></button>
+								</div>
+							</div><!-- Contenedor de tel. -->
+						</div>
+						<div class="row">
+							<div class="phone-container">
+								<div class="col-xs-2">
+									<input type="text" ng-model="areaCode" class="form-control" placeholder="Cod. Area">
+									<p class="help-block"><small>Si estas en BS AS es 011</small></p>
+								</div>
+								<div class="col-xs-5">
+									<input type="text" ng-model="number" class="form-control" placeholder="Nro. Telefono">
+								</div>
+								<div class="col-xs-4">
+									<select ng-model="typeId" class="form-control">
+										<option value="1">Celular</option>
+										<option value="2">Particular</option>
+										<option value="3">Laboral</option>
+									</select>
+								</div>
+								<div class="col-xs-1">
+									<button ng-click="addPhone()" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-plus"></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Cuéntanos como sos...</label>
+						<textarea class="form-control no-resize"  ng-model="user.description" placeholder="Tu espacio..."></textarea>
+						<p class="help-block">Puedes expresar lo que quieras, es tu espacio :)</p>
+					</div>
+
+					<button ng-click="saveUser()" class="btn btn-success btn-block btn-lg" type="submit"><i class="glyphicon glyphicon-ok"></i>{{btnText}}</button>
+					
+				</form>
+			</div><!-- /.the-box -->
+			<!-- End basic form elements -->
+		</div><!-- /.col-sm-10 -->
+		<div class="col-sm-1"></div>
+	</div><!-- /.row -->
+	<div class="the-box toolbar no-border no-margin">
+		<div class="btn-toolbar" role="toolbar">
+
+			<!-- /.btn-group .pull-right -->
+		</div>
+		<!-- /.btn-toolbar -->
+	</div>
+	<!-- /.the-box -->
+</div><!-- /.user-apps-wrap -->

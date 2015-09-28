@@ -1,0 +1,75 @@
+<!-- BEGIN USER APPS INBOX -->
+<div class="mail-apps-wrap">
+    <div class="the-box bg-primary no-border no-margin heading">
+        <div class="row">
+            <h1><i class="fa fa-flag icon-lg icon-circle icon-bordered"></i> Mis Ayudas</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container-masonry">
+    <div class="alert alert-warning alert-bold-border fade in alert-dismissable" ng-show="activating">
+        <strong>Hey!</strong> No has ayudado a ninguna causa, aún. Puedes hacerlo de manera muy rápida y segura!. Alguien puede necesitarte mas de lo que imaginas!
+    </div>
+    <ol>
+        <li class="item-masonry" ng-repeat="request in requests">
+            <p>{{message}}</p>
+            <div class="the-box no-border full store-item text-center mansory-inner">
+                <img data-ng-src="{{request.image[0].path}}" class="item-image img-responsive" alt="Image" ui-sref="panel.requestDetailUser({id: request.id})">
+
+                <div class="the-box bg-default no-margin no-border item-des">
+                    <p class="text-muted">
+                        {{request.object.description}}
+                    </p>
+
+                    <h3><a class="bolded" ui-sref="panel.requestDetailUser({id: request.id})">{{request.title}}</a>
+                    </h3>
+
+                    <strong class="text-left" ng-if="request.category.id == '9'">Recaudado hasta ahora: <span id="currency-default">{{ request.amountCollected[0].quan | currency}}</span></strong>
+                    <div class="row extra-data">
+                        <div ng-if="request.category.id == '9'">
+                            <p class="text-muted text-left">Haz ayudado con <strong> {{request.amountDonated | currency}}</strong> esta causa! :)</p>
+                        </div>
+                        <div ng-if="request.category.id != '9'">
+                            <span ng-if="request.donations[0].processState.id=='W'">
+                                <p class="text-muted text-left" >
+                                    <small>Después de ponerte de acuerdo con la persona que necesita ayuda, cuéntanos... Pudiste concluir la ayuda solicitada?</small>
+                                </p>
+                            </span>
+                            <span ng-if="request.donations[0].processState.id=='C'">
+                                <p><span class="badge badge-info">No pudo concretarse la ayuda</span>
+                            </p>
+                            <p class="text-muted text-left">
+                                <small>Es una pena que no has podido concreatar la ayuda. Igualmente sigue ayudando en otros pedido. Hay mucha gente que te necesita mucho más de lo que te imaginás.</small>
+                            </p>
+                            </span>
+                            <span ng-if="request.donations[0].processState.id=='F'">
+                                <p><span class="badge badge-success">Ayuda concretada!</span></p>
+                                <p class="text-muted text-left" >
+                                    <small>Has contribuido con esta causa. Sigue así. Hay mucha gente que te necesita mucho más de lo que te imaginás!</small>
+                                </p>
+                            </span>
+                            <div class="row" ng-if="request.donations[0].processState.id=='W'">
+                                <div class="col-md-6 col-xs-6">
+                                    <button ng-click="confirmHelp(request.donations[0].id)" ng-if="request.category.id != '9'" class="btn btn-sm btn-danger">
+                                        <span class="glyphicon glyphicon-ok"></span><span class="hidden-sm hidden-xs"> Sí!,Pude ayudar</span>
+                                    </button>
+                                </div>
+                                <div class="col-md-6 col-xs-6">
+                                    <button ng-click="cancelHelp(request.donations[0].id)" ng-if="request.category.id != '9'" class="btn btn-sm btn-info">
+                                        <span class="glyphicon glyphicon-remove"></span><span class="hidden-sm hidden-xs"> No esta vez</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="request.donations[0].processState.id=='F'">
+                                <div id="fb-root">
+                                    <div class="fb-share-button text-center" data-href="https://github.com/ayudaresfacil/ayudaresfacil" data-layout="button"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ol>
+</div>

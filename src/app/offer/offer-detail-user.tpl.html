@@ -1,0 +1,73 @@
+<!-- BEGIN USER APPS INBOX -->
+<div class="mail-apps-wrap">
+
+    <div class="the-box bg-danger no-border no-margin heading">
+        <div class="row">
+            <h1><i class="fa fa-gift icon-lg icon-circle icon-bordered"></i> Detalle del ofrecimiento</h1>
+        </div>
+    </div>
+
+    <div class="the-box no-border" ng-repeat="offer in offers">
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <carousel interval="myInterval" style="height:350px">
+                    <slide ng-repeat="slide in offer.image" active="slide.active">
+                        <img ng-src="{{slide.path}}" style="margin:auto;">
+                    </slide>
+                </carousel>
+            </div>
+
+            <div class="col-md-8 col-sm-6">
+                <h2 class="medium-heading more-margin-bottom text-primary">
+                    {{offer.title}}
+                </h2>
+
+                <p style="margin-top: -10px;">
+                    <small>
+                        <span class="glyphicon glyphicon-heart"></span> Favoritos: {{offer.favorites[0].quan}}
+                    </small>
+                </p>
+                
+                <p>
+                    <span ng-if="request.processState.id == 'P'" class="badge badge-info">Publicación Pausada</span>
+                </p>
+
+                <p>
+                    <span ng-if="request.processState.id == 'C'" class="badge badge-success">Objetivo Cumplido</span>
+                </p>
+
+                <p>
+                    {{offer.description}}
+                </p>
+
+                <blockquote>
+                    <p>{{offer.type.description}}</p>
+                    <small>{{offer.type.comment}}</small>
+                </blockquote>
+
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h4>{{offer.object.description}}</h4>
+                            <p>
+                                {{offer.category.description}} > {{offer.subcategory.description}}
+                            </p>
+                            <p ng-if="offer.quantity == '1'">
+                                Disponible: <strong>{{offer.quantity}}</strong>
+                            </p>
+                            <p ng-if="offer.quantity != '1'">
+                                Disponible: <strong><span id="currency-default">{{ offer.quantity | currency}}</span></strong>
+                                <br>
+                            </p>
+                            </p>
+                            <p>Visto:
+                                <strong>{{offer.views}}</strong> veces</p>
+                            <p>Vencimiento:
+                                <strong>{{offer.expirationDate}}</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

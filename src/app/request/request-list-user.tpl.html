@@ -1,0 +1,61 @@
+<!-- BEGIN USER APPS INBOX -->
+<div class="mail-apps-wrap">
+    <div class="the-box bg-warning no-border no-margin heading">
+        <div class="row">
+            <h1><i class="fa fa-bullhorn icon-lg icon-circle icon-bordered"></i> Mis pedidos</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container-masonry">
+    <div class="alert alert-warning alert-bold-border fade in alert-dismissable" ng-show="activating">
+        <strong>Hey!</strong> Todavía no has creado ningún pedido de ayuda..
+    </div>
+    <ol>
+        <li ng-if="request.isOwner == '1'" class="item-masonry" ng-repeat="request in requests">
+            <div class="the-box no-border full store-item text-center mansory-inner">
+                <img data-ng-src="{{request.image[0].path}}" class="item-image img-responsive" alt="Image" ui-sref="panel.requestDetailUser({id: request.id})">
+
+                <div class="the-box bg-default no-margin no-border item-des">
+                    <div class="pull-right">
+                        <a href ng-click="requestDelete(request.id)" title="Dar de baja">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a> |
+                        <a href ui-sref="panel.requestEdit({id: request.id})" title="Editar">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </a>
+                    </div>
+
+                    <p class="text-muted text-left">
+                        {{request.object.description}}
+                    </p>
+
+                    <h3><a class="bolded" ui-sref="panel.requestDetailUser({id: request.id})">{{request.title}}</a>
+                    </h3>
+
+                    <p>{{request.description}}</p>
+
+                    <!-- <p>{{message}}</p> -->
+
+                    <strong class="text-left" ng-if="request.category.id == '9'">Recaudado: <span id="currency-default">{{ request.amountCollected[0].quan | currency}}</span></strong>
+                    <div ng-if="request.category.id == '9'" class="progress no-rounded progress-sm progress-striped">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="request.amountCollected[0].quan" aria-valuemin="0" aria-valuemax="100" style="width: {{request.progressValue}}%">
+                        </div>
+                    </div>
+                    
+                    <div class="row extra-data">
+                        <div class="col-md-6 col-xs-6 text-left">
+                            <a href ng-click="toggleFavorite()" title="Favorito">
+                                <i class="glyphicon glyphicon-heart text-muted" ng-class="{'text-warning': request.isFavorite == '1'}"></i>
+                            </a>
+                            {{request.favorites[0].quan}}
+                        </div>
+                        <div class="col-md-6 col-xs-6 text-right">
+                            <i class="glyphicon glyphicon-eye-open text-muted"></i> {{request.views}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ol>
+</div>

@@ -1,0 +1,117 @@
+<div class="panel wizard with-nav-tabs panel-success panel-no-border" style="margin:20px 0;">
+    <div class="panel-heading">
+        <ul class="nav nav-tabs">
+            <li ng-class="{ active: flow.step == 0, completed: flow.step > 0}" ><a href="javascript:return false;" data-toggle="tab"><i class="fa fa-users"></i> Información de la publicación</a>
+            </li>
+            <li ng-class="{ active: flow.step == 1, completed: flow.step > 1 }"><a href="javascript:return false;" data-toggle="tab"><i class="fa fa-users"></i> Poniendose en contacto</a>
+            </li>
+            <li ng-class="{ active: flow.step == 2, completed: flow.step > 2 }"><a href="javascript:return false;" data-toggle="tab"><i class="fa fa-check"></i> Fin</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="panel-collapse-1" class="collapse in">
+        <div class="tab-content">
+
+            <div class="tab-pane fade" ng-class="{active: flow.step == 0, in: flow.step == 0}" id="wizard-1-step1">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <h4 class="small-heading">{{user.name}}, haz dicho que necesitas esto?</h4>
+                            
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-info alert-bold-border square fade in">
+                                        <strong>Recuerda!</strong> Otras personas con menores posibilidades podrían necesitarlo también.
+                                        <a href="#fakelink" class="alert-link"></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" data-ng-if="offer">
+                                <div class="col-sm-6">
+                                    <img class="img-thumbnail" ng-src="{{offer.image[0].path}}" alt="{{offer.object.description}}"/>
+                                </div>
+                            
+                                <div class="col-sm-6">
+                                    <h3>{{offer.title}}</h3>
+                                    <p>
+                                        <small>{{offer.description}}</small>
+                                    </p>
+                                    <p>
+                                        <span class="badge badge-default"> {{offer.quantity}} disponibles</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer text-right">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-5 text-right">
+                            <a href="#/ofrecimiento-detalle/{{offer.id}}" class="btn btn-warning PrevStep"><i class="fa fa-angle-left"></i> Volver</a>
+                        </div>
+                        <div class="col-sm-6 col-xs-7 text-left">
+                            <a class="btn btn-warning NextStep" data-ng-click="flow.toNextStep()">Si, lo necesito! <i class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-pane fade" ng-class="{active: flow.step == 1, in: flow.step == 1}" id="wizard-1-step2">
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <h4 class="small-heading more-margin-bottom">Quieres agregar algo?</h4>
+                            <p>Si quieres, puedes hacer una observación al dueño de la publicación sobre el pedido que haz iniciado</p>
+                            <form role="form">
+                                <div class="form-group">
+                                    <label>Comentarios</label>
+                                    <textarea class="form-control" data-ng-model="comments" style="height: 100px;"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer text-right">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-5 text-right">
+                            <a class="btn btn-warning PrevStep" data-ng-click="flow.toPrevStep()"><i class="fa fa-angle-left"></i> Volver</a>
+                        </div>
+                        <div class="col-sm-6 col-xs-7 text-left">
+                            <a class="btn btn-warning NextStep" data-ng-click="flow.toNextStep()">Finalizar! <i class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" ng-class="{active: flow.step == 2, in: flow.step == 2}" id="wizard-1-step3">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2"> 
+
+                            <div ng-if="status == 'loading'">
+                                Cargando...
+                            </div>
+                            
+                            <div class="jumbotron" ng-if="status == 'congrats'">
+                                <h1>Felicitaciones!</h1>
+                                <p>Haz finalizado el pedido.</p>
+                                <p>En breve le enviaremos un mensaje al dueño de la publicación, poniendolos en contacto para concretar la operación.</p>
+                                <p><a ui-sref="web.home" class="btn btn-primary btn-lg" role="button">Ir al home</a></p>
+                            </div>
+
+                            <div class="jumbotron" ng-if="status == 'fail'">
+                                <h1>Ups! Lo sentimos...</h1>
+                                <p>Al parecer surgió un error al intentar realizar esta operación</p>
+                                <p>Por favor, intenta nuevamente mas tarde. Si el problema persiste, ponte en contacto con el equipo de desarrollo.</p>
+                                <p><a ui-sref="web.home" class="btn btn-primary btn-lg" role="button">Ir al home</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

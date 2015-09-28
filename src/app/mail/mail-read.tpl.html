@@ -1,0 +1,75 @@
+<!-- BEGIN MAIL APPS READ MAIL -->
+<div class="mail-apps-wrap" id="modal-messages-container">
+    <div class="the-box bg-success no-border no-margin heading">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2><i class="fa fa-comments icon-circle icon-bordered"></i> Conversación</h2>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <div class="the-box no-margin">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- BEGIN CHAT -->
+                <div class="the-box no-border">
+                    <div ng-if="noMessages" class="alert alert-warning alert-bold-border square fade in alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    Todavia no tenés mensajes... Escribe en alguna publicación o haz una nueva publicación, alguién puede necesitarte <strong>más de lo que te imaginas!</strong> :)
+                    </div>
+                    <h4 class="medium-heading more-margin-bottom">Conversación de "{{publication.title}}"</h4>
+                    <div class="chat-wrap scroll-chat-widget" id="container-messages">
+                        <ul class="media-list media-xs media-dotted media-chat" >
+                            <div ng-repeat="message in messages" >
+                                <li class="media">
+                                    <a ng-class="(message.userFrom.id==user.id) ? 'pull-left' : 'pull-right'">
+                                        <img class="media-object img-circle" data-ng-src="{{message.userFrom.profileImage}}" alt="Avatar">
+                                    </a>
+                                    <div class="media-body" ng-class="(message.userFrom.id==user.id) ? 'me' : ''">
+                                        <p class="name" >
+                                            <small>{{message.userFrom.name}}</small>
+                                        </p>
+                                        <p class="small">{{message.text}}</p>
+                                        <p class="small">
+                                            <small>{{message.createDate}}</small>
+                                        </p>
+                                    </div>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                    <!-- /.chat-wrap -->
+                    <div class="action-chat">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <input id="inputText" ng-keypress="$event.keyCode == 13 ? saveMessage() : null" type="text" class="form-control" placeholder="Escribe un mensaje y presiona enter">
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.col-xs-8 -->
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <a data-toggle="tooltip" ng-click="saveMessage()" title="Enviar Mensaje" class="btn btn-sm btn-success"><i class="fa fa-send"></i></a>
+                                    <a data-toggle="tooltip" ng-click="getConversation()" title="Actualizar" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
+                                </div>
+                            </div>
+                            <!-- /.col-xs-8 -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.action -->
+                </div>
+                <!-- /.the-box .no-border -->
+                <!-- END CHAT -->
+
+            </div>
+            <!-- /.col-sm-8 col-md-9 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.the-box -->
+</div>
+<!-- /.mail-apps-wrap -->
+<!-- END MAIL APPS READ MAIL -->

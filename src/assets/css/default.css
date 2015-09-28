@@ -1,0 +1,114 @@
+/**
+ * HOME AND INSTITUTIONAL
+ */
+
+.the-box.full-width {
+    overflow-x: hidden;
+}
+/**
+ * WIZARD
+ */
+
+.wizard .panel-heading {
+    padding: 1px 0 !important;
+}
+.wizard .nav-tabs {
+    margin: 0;
+}
+.wizard .nav-tabs > li > a {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 15px 10px 30px !important;
+    cursor: default!important;
+}
+.wizard .nav-tabs > li > a:first {
+    padding-left: 0px !important;
+}
+.wizard .nav-tabs > li > a:hover {
+    color: #fff!important;
+    background-color: #8CC152!important;
+    border: 0!important;
+}
+.wizard .nav-tabs > li.active > a:hover {
+    color: #434A54!important;
+    background-color: #fff!important;
+    border: 0!important;
+}
+.wizard .nav-tabs > li.completed > a:hover {
+    color: #fff!important;
+    background-color: #c5dfa8!important;
+    border: 0!important;
+}
+.wizard .nav-tabs>li.active:after {
+    content: '';
+    border-top: 21px solid transparent;
+    border-left: 14px solid #fff;
+    border-bottom: 21px solid transparent;
+    position: absolute;
+    top: 0px;
+    display: inline-block;
+    left: 100%;
+    margin-left: 0px;
+    z-index: 2;
+}
+.wizard .nav-tabs>li.completed {
+    background: #c5dfa8;
+}
+.wizard .nav-tabs>li.completed:after {
+    content: '';
+    border-top: 21px solid transparent;
+    border-left: 14px solid #c5dfa8;
+    border-bottom: 21px solid transparent;
+    position: absolute;
+    top: 0px;
+    display: inline-block;
+    left: 100%;
+    margin-left: 0px;
+    z-index: 2;
+}
+/**
+ * List Items
+ */
+
+.container-masonry {
+    padding-top: 20px;
+}
+li.item-masonry img:hover {
+    cursor: pointer;
+}
+.extra-data {
+    padding: 10px 0 0 0;
+    border-top: 1px solid #eaeaea;
+    margin: 10px 0 0 0;
+}
+/**
+ * SIDEBAR
+ */
+
+.sidebar-left {
+    position: absolute;
+}
+ul.sidebar-menu {
+    margin: 0;
+    padding: 0 0 40px 0;
+    background: #313940;
+}
+@media (max-width: 1024px) {
+    .img-responsive {
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+    }
+}
+/**
+ * GENERAL
+ */
+
+a {
+    cursor: pointer;
+}
+
+.home {
+    padding-bottom: 74px !important; 
+}

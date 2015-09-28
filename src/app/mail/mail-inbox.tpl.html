@@ -1,0 +1,42 @@
+<!-- BEGIN MAIL APPS INBOX -->
+<div class="mail-apps-wrap">
+    <div class="the-box bg-success no-border no-margin heading">
+        <div class="row">
+            <div class="col-sm-8">
+                <h1><i class="fa fa-envelope icon-lg icon-circle icon-bordered"></i> Bandeja de Entrada</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <div class="the-box no-margin">
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+                <div class="list-group square no-border">
+                    <a ng-click="getAllConversationsFromAllPublications()" class="list-group-item">Todas las publicaciones <!--<span class="badge badge-success">5</span>--></a>
+                    <a ng-click="getAllConversationsFromMyPublications()" class="list-group-item">Mis publicaciones <!--<span class="badge badge-info">11</span>--></a>
+                    <a ng-click=" getAllConversationsFromOthersPublications()" class="list-group-item">Publicaciones de otros <!--<span class="badge badge-warning">15</span>--></a>
+                </div>
+            </div>
+            <!-- /.col-sm-4 col-md-3 -->
+            <div class="col-sm-8 col-md-9">
+                <div ng-if="noConversations" class="alert alert-warning alert-bold-border square fade in alert-dismissable">
+                Todavia no tenés mensajes... Escribe en alguna publicación o haz una nueva publicación, alguién puede necesitarte <strong>más de lo que te imaginas!</strong> :)
+                </div>
+                <div ng-if="conversations" class="list-group success square no-side-border" ng-repeat="conversation in conversations">
+                    <a ng-click="openConversation({publicationId:conversation.publication.id,conversationId:conversation.conversationId})" class="list-group-item mail-list" ng-class="(conversation.commonState == 'L') ? 'list-group-item mail-list read' : ''">
+                        <!--<span class="favorite fa fa-star"></span>-->
+                        <img data-ng-src="{{conversation.userFrom.profileImage}}" class="avatar img-circle" alt="Avatar">
+                        <span class="name">{{conversation.userFrom.name}}</span>
+                        <span class="subject">{{conversation.text}}</span>
+                        <span class="time">{{conversation.createDate}}</span>
+                    </a>
+                </div>
+            </div>
+            <!-- /.col-sm-8 col-md-9 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.the-box -->
+</div>
+<!-- /.mail-apps-wrap -->
+<!-- END MAIL APPS INBOX -->

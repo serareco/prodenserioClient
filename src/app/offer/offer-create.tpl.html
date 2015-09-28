@@ -1,0 +1,89 @@
+<div class="mail-apps-wrap">
+
+    <div class="the-box bg-danger no-border no-margin heading">
+        <div class="row">
+            <h1><i class="fa fa-gift icon-lg icon-circle icon-bordered"></i> Crear ofrecimiento</h1>
+        </div>
+    </div>
+
+    <div class="the-box no-border">
+        <form name="myForm">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <input type="text" maxlength="30" class="form-control input-md" name="title" ng-model="offer.title" placeholder="Un titulo para la publicación" ng-required="true">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control input-md" name="description" ng-model="offer.description" rows="20" ng-required="true" placeholder="Un lugar para que te expreses.."></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Contá todos los detalles</label>
+                        <p class="help-block"><small>Mientras más claro seas para contar tu situación mejores resultados vas a obtener.</small>
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="hidden-xs">Categoria</label>
+                        <select ng-model="offer.categoryId" name="categoryId" class="form-control input-md" ng-change="getSubcategories(offer.categoryId);" required>
+                            <option value="">-- Elige una opción --</option>
+                            <option ng-repeat="category in categories" value="{{category.id}}" ng-selected="offer.categoryId == category.id" data-ng-if="category.id != '9'">{{category.description}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="hidden-xs">Subcategoría</label>
+                        <select ng-model="offer.subcategoryId" class="form-control input-md" ng-change="getObjects(offer.categoryId, offer.subcategoryId);" required>
+                            <option value="">-- Elige una opción --</option>
+                            <option ng-repeat="subcategory in subcategories" value="{{subcategory.id}}" ng-selected="offer.subcategoryId == subcategory.id">{{subcategory.description}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="hidden-xs">Objeto ofrecido</label>
+                        <select ng-model="offer.objectId" class="form-control input-md" required>
+                            <option value="">-- Elige una opción --</option>
+                            <option ng-repeat="object in objects" value="{{object.id}}" ng-selected="offer.objectId == object.id">{{object.description}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div ng-if="offer.categoryId == '9'" class="form-group">
+                            <label class="hidden-xs">Cantidad de dinero a ofrecer</label>
+                            <input type="text" class="form-control input-md" name="cantidad" ng-model="offer.quantity" placeholder="Ingrese la suma sin signos / ej.: 1000000" ng-required="true">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fecha de expiración</label>
+                        <div style="display:inline-block;">
+                            <p class="input-group">
+                                <input type="text" datepicker-popup="yyyy-MM-dd" class="form-control input-md" ng-model="offer.expirationDate" name="expirationDate" ng-required="true" show-weeks="false" is-open="opened" date-disabled="disabled(date, mode)" show-button-bar="false" />
+                                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Imagenes</label>
+                        <input type="file" name="file[]" id="inputFile" multiple required/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr/>
+                <p class="text-center">
+                    <button ng-click="submitForm(myForm.$valid)" class="btn btn-success" type="submit"><i class="glyphicon glyphicon-ok" ng-disabled="myForm.$invalid"></i>{{btnText}}</button>
+                    <button ui-sref="web.offerList" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>Cancelar</button>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>

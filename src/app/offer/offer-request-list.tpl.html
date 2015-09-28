@@ -1,0 +1,58 @@
+<!-- BEGIN USER APPS INBOX -->
+<div class="mail-apps-wrap">
+
+    <div class="the-box bg-danger no-border no-margin heading">
+        <div class="row">
+            <h1><i class="fa fa-gift icon-lg icon-circle icon-bordered"></i> Pedidos de mis ofrecimientos</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container-masonry">
+    <ol>
+        <li ng-if="offer.isOwner == '1'" class="item-masonry" ng-repeat="offer in offers">
+            <div class="the-box no-border full store-item text-center mansory-inner">
+
+                <img ng-src="{{offer.image[0].path}}" class="item-image" alt="Image" ui-sref="panel.offerDetailUser({id: offer.id})">
+
+                <div class="the-box bg-default no-margin no-border item-des">
+                    <div class="pull-right">
+                        <a href ng-click="offerDelete(offer.id)" title="Dar de baja">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a> |
+                        <a href ui-sref="panel.offerEdit({id: offer.id})" title="Editar">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </a>
+                    </div>
+
+                    <p class="text-muted">
+                        {{offer.object.description}}
+                    </p>
+
+                    <h3><a class="bolded" ui-sref="panel.offerDetailUser({id: offer.id})">{{offer.title}}</a>
+                        </h3>
+
+                    <p>{{offer.description}}</p>
+
+                    <p>{{message}}</p>
+
+                    <a href="#/checkout/offer/{{offer.id}}" ng-if="offer.processState.id == 'V' &&  offer.isOwner == '0'" class="btn btn-danger btn-block">
+                        <span class="glyphicon glyphicon-ok"></span>Lo necesito
+                    </a>
+
+                    <div class="row extra-data">
+                        <div class="col-md-6 col-xs-6 text-left">
+                            <a href ng-click="toggleFavorite()" title="Favorito">
+                                <i class="glyphicon glyphicon-heart text-muted" ng-class="{'text-warning': offer.isFavorite == '1'}"></i>
+                            </a>
+                            {{offer.favorites[0].quan}}
+                        </div>
+                        <div class="col-md-6 col-xs-6 text-right">
+                            <i class="glyphicon glyphicon-eye-open text-muted"></i> {{offer.views}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ol>
+</div>

@@ -1,0 +1,83 @@
+<h1 class="page-heading">Ofrecimientos
+    <small>Detalle del ofrecimiento</small>
+</h1>
+
+<ol class="breadcrumb default square rsaquo sm">
+    <li>
+        <a href="index.html"><i class="fa fa-home"></i></a>
+    </li>
+    <li>
+        <a href="index.html#/ofrecimientos">Ofrecimientos</a>
+    </li>
+    <li class="active">Ver Detalle</li>
+</ol>
+
+<div class="the-box no-border" ng-repeat="offer in offers">
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <carousel interval="myInterval" style="height:350px">
+                <slide ng-repeat="slide in offer.image" active="slide.active">
+                    <img ng-src="{{slide.path}}" style="margin:auto;">
+                </slide>
+            </carousel>
+        </div>
+
+        <div class="col-md-8 col-sm-6">
+            <h2 class="medium-heading more-margin-bottom text-primary">
+                {{offer.title}}
+                 <a href ng-if="offer.isOwner == '0'" class="pull-right" ng-click="toggleFavorite()" title="Favorito">
+                    <i class="glyphicon glyphicon-heart text-muted"  ng-class="{'text-warning': offer.isFavorite == '1'}"></i>
+                </a>
+            </h2>
+            
+            <p>
+                <span ng-if="offer.processState.id == 'P'" class="badge badge-info">Publicación Pausada</span>
+            </p>
+
+            <p>
+                <small>
+                    <span class="glyphicon glyphicon-heart"></span> Favoritos: {{offer.favorites[0].quan}}
+                </small>
+            </p>
+
+            <p>
+                {{offer.description}}
+            </p>
+
+            <blockquote>
+                <p>{{offer.type.description}}</p>
+                <small>{{offer.type.comment}}</small>
+            </blockquote>
+
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4>{{offer.object.description}}</h4>
+                        <p>
+                            {{offer.category.description}} > {{offer.subcategory.description}}
+                        </p>
+                        Disponible: <strong>{{offer.quantity}}</strong>
+                        </p>
+                        <p>Visto:
+                            <strong>{{offer.views}}</strong> veces</p>
+                        <p>Vencimiento:
+                            <strong>{{offer.expirationDate}}</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-10 col-xs-6">
+                    <button ng-if="offer.isOwner == '0'" class="btn btn-success btn-lg" ng-click="openConversation({publicationId:offer.id})">
+                        <span class="fa fa-envelope"></span> Envíale un mensaje
+                    </button>
+
+                    <a href="#/checkout/offer/{{offer.id}}" ng-if="offer.processState.id == 'V' && offer.isOwner == '0'" class="btn btn-danger btn-lg">
+                        <span class="glyphicon glyphicon-ok"></span> Lo necesito</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
